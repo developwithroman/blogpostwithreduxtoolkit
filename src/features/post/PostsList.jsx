@@ -1,13 +1,20 @@
-// import { useSelector } from "react-redux";
-// import { allPosts } from "./postSlice";
+import { useSelector } from "react-redux";
+import { allPosts } from "./postSlice";
+import PostAuthor from "./PostAuthor";
 
 const PostsList = () => {
-  const posts = [];
+  const posts = useSelector(allPosts);
+
   console.log("posts", posts);
   const renderedPosts = posts.map((post) => (
     <article key={post.id}>
       <h3>{post.title}</h3>
-      <p>{post.content.substring(0, 100)}</p>
+      <p>{post.description.substring(0, 100)}</p>
+      <p>
+        <span>
+          Author: <PostAuthor userId={post.user_id} />
+        </span>
+      </p>
     </article>
   ));
   return (
