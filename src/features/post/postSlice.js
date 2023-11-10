@@ -1,26 +1,21 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-const initialState = [
-  {
-    id: 1,
-    title: "Ttile 1",
-    description: "consnte tnions nteions ",
-    user_id: 0,
-    reaction: {
-      thumbsUp: 0,
-      dislike: 0,
-    },
-  },
-  {
-    id: 2,
-    title: "Ttile 2",
-    description: "consnte tnions nteions ",
-    user_id: 1,
-    reaction: {
-      thumbsUp: 0,
-      dislike: 0,
-    },
-  },
-];
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
+import axios from "axios";
+const initialState = {
+  posts: [],
+  status: "idle", // 'succeeded',
+  error: null,
+};
+const POST_URL = "https://jsonplaceholder.typicode.com/posts";
+
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  try {
+    const { data } = await axios.get(POST_URL);
+    console.log(data);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
 
 const postsSlice = createSlice({
   name: "posts",
@@ -28,7 +23,7 @@ const postsSlice = createSlice({
   reducers: {
     postAdded: {
       reducer(state, action) {
-        state.push(action.payload);
+        state.posts.push(action.payload);
       },
       prepare(title, description, userId) {
         return {
@@ -53,20 +48,28 @@ const postsSlice = createSlice({
       }
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        const loadedPosts = action.payload.map((post) => {
+          post.reactions = { thumbsUp: 0, dislike: 0 };
+          return post;
+        });
+        state.posts = loadedPosts;
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
 });
 
-// simplest way to create the slice
-// const postsSlice = createSlice({
-//   name: "posts",
-//   initialState,
-//   reducers: {
-//     postAdded(state, action) {
-//       state.push(action.payload);
-//     },
-//   },
-// });
-
-export const allPosts = (state) => state.posts;
+export const allPosts = (state) => state.posts.posts;
+export const getPostsStatus = (state) => state.posts.status;
+export const getPostError = (state) => state.posts.error;
 
 export const { postAdded, reactionAdded } = postsSlice.actions;
 

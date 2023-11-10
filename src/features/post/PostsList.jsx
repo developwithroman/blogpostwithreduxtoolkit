@@ -1,26 +1,36 @@
-import { useSelector } from "react-redux";
-import { allPosts } from "./postSlice";
-import PostAuthor from "./PostAuthor";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  allPosts,
+  fetchPosts,
+  getPostError,
+  getPostsStatus,
+} from "./postSlice";
+import { useEffect } from "react";
+import PostsExcerpt from "./PostsExcerpt";
 
 const PostsList = () => {
+  const dispatch = useDispatch();
   const posts = useSelector(allPosts);
+  const postsStatus = useSelector(getPostsStatus);
+  const postsErr = useSelector(getPostError);
 
-  console.log("posts", posts);
-  const renderedPosts = posts.map((post) => (
-    <article key={post.id}>
-      <h3>{post.title}</h3>
-      <p>{post.description.substring(0, 100)}</p>
-      <p>
-        <span>
-          Author: <PostAuthor userId={post.user_id} />
-        </span>
-      </p>
-    </article>
-  ));
+  useEffect(
+    () => {
+      if (postsStatus === "idle") dispatch(fetchPosts());
+    },
+    [postsStatus, dispatch] //why?
+  );
+  let content;
+
+  postsStatus === "loading" && (content = <p>Loading...</p>);
+  postsStatus === "failed" && (content = <p>{postsErr}...</p>);
+  postsStatus === "succeeded" &&
+    (content = posts.map((post) => <PostsExcerpt key={post.id} post={post} />));
+
   return (
     <section>
       <h2>Posts</h2>
-      {renderedPosts}
+      {content}
     </section>
   );
 };
