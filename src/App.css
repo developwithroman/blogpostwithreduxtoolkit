@@ -40,3 +40,29 @@
 .read-the-docs {
   color: #888;
 }
+
+form {
+  border: 1px solid #eee;
+  padding-right: 1rem;
+}
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.field-label {
+  margin: 1rem;
+}
+
+.field > input,
+.field > textarea,
+.field > select {
+  padding: 0.5rem;
+}
+
+.individual-post {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}

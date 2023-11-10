@@ -2,8 +2,9 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = [
   {
     id: 1,
-    title: "Ttile 1",
-    description: "consnte tnions nteions ",
+    title: "React Tutorial by LF Technologies",
+    description:
+      "Welcome to Leapfrog Technology, where innovation and collaboration thrive! We're thrilled to have you join our dynamic team, and we extend a warm welcome to you as you embark on this exciting journey with us. ",
     user_id: 0,
     reaction: {
       thumbsUp: 0,
@@ -12,8 +13,9 @@ const initialState = [
   },
   {
     id: 2,
-    title: "Ttile 2",
-    description: "consnte tnions nteions ",
+    title: "Company Onboarding Orientation",
+    description:
+      "Please know that our doors are always open, and People Management is here to support you every step of the way, so never hesitate to reach out if you have any questions, whether big or small and together, we'll continue to push the boundaries of what's possible. ",
     user_id: 1,
     reaction: {
       thumbsUp: 0,
@@ -47,7 +49,7 @@ const postsSlice = createSlice({
     },
     reactionAdded(state, action) {
       const { postId, reaction } = action.payload;
-      const existingPost = state.posts.find((post) => post.id === postId);
+      const existingPost = state.find((post) => post.id === postId);
       if (existingPost) {
         existingPost.reaction[reaction]++;
       }

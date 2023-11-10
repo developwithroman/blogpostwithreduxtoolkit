@@ -6,6 +6,7 @@ function App() {
   return (
     <main className="App">
       <AddPost />
+      <hr />
       <PostsList />
     </main>
   );

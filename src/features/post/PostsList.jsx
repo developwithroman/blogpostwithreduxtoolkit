@@ -8,7 +8,7 @@ const PostsList = () => {
 
   console.log("posts", posts);
   const renderedPosts = posts.map((post) => (
-    <article key={post.id}>
+    <article key={post.id} className="individual-post">
       <h3>{post.title}</h3>
       <p>{post.description.substring(0, 100)}</p>
       <p>

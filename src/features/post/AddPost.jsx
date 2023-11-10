@@ -30,30 +30,30 @@ const AddPost = () => {
   ));
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Title:
+      <div className="field">
+        <label className="field-label">Title:</label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-      </label>
-      <br />
-      <label>
-        Description:
+      </div>
+
+      <div className="field">
+        <label className="field-label">Description:</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-      </label>
-      <label>
-        User:
+      </div>
+      <div className="field">
+        <label className="field-label">User:</label>
         <select name="users" id="postAuthor" onChange={onAuthorChange}>
           <option value=""></option>
           {userOptions}
         </select>
-      </label>
-      <br />
+      </div>
+
       <button type="submit">Submit</button>
     </form>
   );
