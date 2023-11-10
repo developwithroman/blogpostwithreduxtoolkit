@@ -7,10 +7,14 @@ import {
 } from "./postSlice";
 import { useEffect } from "react";
 import PostsExcerpt from "./PostsExcerpt";
+import { fetchUsers } from "../users/usersSlice";
 
 const PostsList = () => {
   const dispatch = useDispatch();
   const posts = useSelector(allPosts);
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
   const postsStatus = useSelector(getPostsStatus);
   const postsErr = useSelector(getPostError);
 

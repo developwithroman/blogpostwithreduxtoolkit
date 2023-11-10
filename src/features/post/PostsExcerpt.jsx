@@ -7,7 +7,7 @@ const PostsExcerpt = ({ post }) => {
       <p>{post.body.substring(0, 100)}</p>
       <p>
         <span>
-          Author: <PostAuthor userId={post.user_id} />
+          Author: <PostAuthor userId={post.userId} />
         </span>
       </p>
       <ReactionButtons post={post} />
