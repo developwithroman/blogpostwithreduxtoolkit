@@ -1,4 +1,5 @@
 import PostAuthor from "./PostAuthor";
+import ReactionButtons from "./ReactionButtons";
 const PostsExcerpt = ({ post }) => {
   return (
     <article>
@@ -9,6 +10,7 @@ const PostsExcerpt = ({ post }) => {
           Author: <PostAuthor userId={post.user_id} />
         </span>
       </p>
+      <ReactionButtons post={post} />
     </article>
   );
 };
