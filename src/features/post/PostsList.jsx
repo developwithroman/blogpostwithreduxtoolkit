@@ -32,10 +32,10 @@ const PostsList = () => {
     (content = posts.map((post) => <PostsExcerpt key={post.id} post={post} />));
 
   return (
-    <section>
+    <>
       <h2>Posts</h2>
-      {content}
-    </section>
+      <section className="flex">{content}</section>
+    </>
   );
 };
 

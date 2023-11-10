@@ -71,3 +71,14 @@ article {
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba(238, 238, 238, 0.4);
 }
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* flex-basis: 20%; */
+  justify-content: center;
+}
+.flex article {
+  flex: 0 0 30%;
+}
