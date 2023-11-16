@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getPostbyID, postAdded, updatePost } from "./postSlice";
+import { getPostbyID, updatePost } from "./postSlice";
 import { allUsers } from "../users/usersSlice";
 import { useNavigate, useParams } from "react-router-dom";
 

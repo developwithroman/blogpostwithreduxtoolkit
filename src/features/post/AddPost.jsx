@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { postAdded } from "./postSlice";
 import { allUsers } from "../users/usersSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [userId, setuserId] = useState();
   const users = useSelector(allUsers);
-
+  const navigate = useNavigate();
   const onAuthorChange = (e) => setuserId(e.target.value);
 
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const AddPost = () => {
       dispatch(postAdded(title, description, userId));
       setTitle("");
       setDescription("");
-      setuserId(null);
+      setuserId("");
+      navigate("/");
     }
   };
 

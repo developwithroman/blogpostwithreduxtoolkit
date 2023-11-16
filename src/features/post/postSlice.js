@@ -52,9 +52,9 @@ const postsSlice = createSlice({
           payload: {
             id: nanoid(),
             title,
-            description,
+            body: description,
             user_id: userId,
-            reaction: {
+            reactions: {
               thumbsUp: 0,
               dislike: 0,
             },
